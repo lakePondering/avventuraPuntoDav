@@ -1,8 +1,13 @@
 #include <iostream>
 #include <string>
+#include "map.hpp"
 
 int main ()
 {
-    return 0;
-    
+    map Alkazart;
+    Alkazart.NAME="Alkazart";
+    Alkazart.info();
+    Alkazart.info();
+    Alkazart.addWall(3,4,2);
+    Alkazart.~map();
 };
