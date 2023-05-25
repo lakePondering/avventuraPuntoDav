@@ -2,7 +2,8 @@
 #define _ENUMS_HPP_
 #include <string>
 
-enum COSTANTS : int {
+enum COSTANTS : int 
+{
     GRIDSIZE = 20,
 };
 
@@ -25,5 +26,31 @@ enum PART_N : int
     HORNS = 8,
 };
 
+enum class Tiles : int16_t //FALLO IN UNICODE
+{
+    EMPTY = 206,    //NEWS
+    FULL = 219,     //
+
+    N = 118,
+    NE = 200,
+    NW = 188,
+    NS = 186,
+    NEW = 202,
+    NES = 204,
+    NWS = 185,
+
+    E = 60,
+    EW = 205,
+    ES = 201,
+    EWS = 203,
+
+    W = 62,
+    WS = 187,
+
+    S = 94,
+};
+
+//funzioni
 std::string f_raceSTR (int race_n);
+char16_t f_getTile (bool n_b,bool e_b,bool w_b,bool s_b);
 #endif
