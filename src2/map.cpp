@@ -2,27 +2,65 @@
 #include <iostream>
 map::map()
 {
-    for (int y = 0; y < GRIDSIZE; y++)
+    for (int y = 0; y < YGRIDSIZE; y++)
     {
-    for (int x = 0; x < GRIDSIZE; x++)
+    for (int x = 0; x < XGRIDSIZE; x++)
     {
-        this->GRID[y][x]= new cell(y,x,false);
+        this->GRID[y][x]= cell(y,x,false);
     }    
     }
 };
 map::~map()
 {
-    for (int y = 0; y < GRIDSIZE; y++)
+
+};
+map::map(bool yx_b[YGRIDSIZE][XGRIDSIZE],std::string name_str)
+{
+    this->NAME=name_str;
+    for (int y = 0; y < YGRIDSIZE; y++)
     {
-    for (int x = 0; x < GRIDSIZE; x++)
+    for (int x = 0; x < XGRIDSIZE; x++)
     {
-        delete GRID[y][x];
+        this->GRID[y][x]= cell(y,x,yx_b[y][x]);
     }    
     }
 };
 
+void map::info()
+{
+    std::cout<<"\n Info "<<this->NAME;
+    for (int y = 0; y < YGRIDSIZE; y++)
+    {
+        std::cout<<"\n ";
+
+    for (int x = 0; x < XGRIDSIZE; x++)
+    {
+        if (this->GRID[y][x].FULL)
+        {
+            f_printSprite(FULL);
+        }else{if(this->GRID[y][x].CONTAINER[0].SPRITE == EMPTY)
+        {
+            f_printSprite(EMPTY);
+        }else{
+            f_printSprite(this->GRID[y][x].CONTAINER[0].SPRITE); 
+        }
+        } 
+    }
+    }
+};
+
 cell::cell()
-{};
+{
+    for (int i = 0; i < MAXTHINGS; i++)
+    {
+        this->CONTAINER[i]= thing();
+    }
+    
+};
+cell::~cell()
+{
+
+};
 cell::cell(int y_n, int x_n, bool full_b)
 {
     this->X=x_n;
@@ -30,29 +68,31 @@ cell::cell(int y_n, int x_n, bool full_b)
     this->FULL=full_b;
 };
 
-void map::info()
+
+
+worldMap::worldMap()
 {
-    char16_t _out;
-    bool _Barray[4];
-    std::cout<<"\n Info "<<this->NAME;
-    for (int y = 0; y < GRIDSIZE; y++)
+    for (int y = 0; y < YGRIDSIZE; y++)
     {
-        std::cout<<"\n";
-    for (int x = 0; x < GRIDSIZE; x++) //FACCIO UN ARRAY CON 4 VALORI E CI INSERISCO SE A NEWS CI SONO MURI, POI STAMPO
+    for (int x = 0; x < XGRIDSIZE; x++)
     {
-        if (y>0) {_Barray[0]=this->GRID[y-1][x]->FULL;
-        }else{_Barray[0]=true;}
-
-        if (x<GRIDSIZE) {_Barray[1]=this->GRID[y][x+1]->FULL;
-        }else{_Barray[1]=true;}   
-
-        if (x>0) {_Barray[2]=this->GRID[y][x-1]->FULL;
-        }else{_Barray[2]=true;}    
-        
-        if (y<GRIDSIZE) {_Barray[3]=this->GRID[y+1][x]->FULL;
-        }else{_Barray[3]=true;}
-
-        std::wcout<<(char16_t)_out;
+        this->GRID[y][x]= map();
     }    
+    }
+};
+worldMap::~worldMap()
+{};
+
+void worldMap::info()
+{
+    std::cout<<"\n Info "<<this->NAME;
+    for (int y = 0; y < YWORLDGRIDSIZE; y++)
+    {
+    std::cout<<"\n ";
+
+    for (int x = 0; x < XWORLDGRIDSIZE; x++)
+    {
+        f_printSprite(this->GRID_S[y][x]);
+    }   
     }
 };

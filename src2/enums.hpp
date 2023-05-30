@@ -4,7 +4,12 @@
 
 enum COSTANTS : int 
 {
-    GRIDSIZE = 20,
+    YGRIDSIZE = 5,
+    XGRIDSIZE = 10,
+    YWORLDGRIDSIZE = 20,
+    XWORLDGRIDSIZE = 40,
+    MAXTHINGS = 20
+
 };
 
 enum RACE_N : int 
@@ -26,31 +31,15 @@ enum PART_N : int
     HORNS = 8,
 };
 
-enum class Tiles : int16_t //FALLO IN UNICODE
+enum SPRITES : uint8_t
 {
-    EMPTY = 206,    //NEWS
-    FULL = 219,     //
-
-    N = 118,
-    NE = 200,
-    NW = 188,
-    NS = 186,
-    NEW = 202,
-    NES = 204,
-    NWS = 185,
-
-    E = 60,
-    EW = 205,
-    ES = 201,
-    EWS = 203,
-
-    W = 62,
-    WS = 187,
-
-    S = 94,
+    EMPTY = 0,
+    FULL= 1,
+    GOBLIN_S=2,
+    TREE=3
 };
-
 //funzioni
 std::string f_raceSTR (int race_n);
-char16_t f_getTile (bool n_b,bool e_b,bool w_b,bool s_b);
+void f_printSprite (SPRITES sprite);
+
 #endif
